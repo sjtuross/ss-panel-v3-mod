@@ -12,7 +12,7 @@ Zepto(function($) {
   };
 
   // load prettify asyncronously to speedup page rendering
-  getScript('//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.js', function() {
+  getScript('//cdn.bootcss.com/prettify/r224/prettify.js', function() {
     prettyPrint();
   });
 

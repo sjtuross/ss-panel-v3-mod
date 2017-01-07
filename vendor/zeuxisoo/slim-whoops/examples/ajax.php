@@ -1,5 +1,5 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.rc.2/handlebars.js"></script>
+<script src="//cdn.bootcss.com/handlebars.js/1.0.0/handlebars.js"></script>
 <script type="text/javascript">
 (function($) {
 
