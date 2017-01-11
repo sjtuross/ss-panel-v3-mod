@@ -99,7 +99,7 @@
 						</div>
 							
 							{if $mu == 0}
-							<div class="col-lg-12 col-sm-12">
+							<div class="col-lg-12 col-sm-12" style="display:none">
 								<div class="card">
 									<div class="card-main">
 										<div class="card-inner margin-bottom-no">
@@ -114,7 +114,7 @@
 							</div>
 							{/if}
 						
-						<div class="col-lg-12 col-sm-12">
+						<div class="col-lg-12 col-sm-12" style="display:none">
 							<div class="card">
 								<div class="card-main">
 									<div class="card-inner margin-bottom-no">
@@ -132,7 +132,7 @@
 							<div class="card">
 								<div class="card-main">
 									<div class="card-inner margin-bottom-no">
-										<p class="card-heading">SSR 新版(3.8.3之后)配置二维码</p>
+										<p class="card-heading">配置二维码</p>
 										<div class="text-center">
 											<div id="ss-qr-n"></div>
 										</div>
@@ -144,7 +144,7 @@
 						
 						
 						{if $mu == 0}
-								<div class="col-lg-12 col-sm-12">
+								<div class="col-lg-12 col-sm-12" style="display:none">
 									<div class="card">
 										<div class="card-main">
 											<div class="card-inner margin-bottom-no">
