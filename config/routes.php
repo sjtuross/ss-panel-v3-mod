@@ -123,7 +123,7 @@ $app->group('/user', function () {
 	$this->get('/edit', 'App\Controllers\UserController:edit');
 	$this->post('/password', 'App\Controllers\UserController:updatePassword');
 	$this->post('/wechat', 'App\Controllers\UserController:updateWechat');
-	$this->post('/rss', 'App\Controllers\UserController:updateRss');
+	$this->post('/ssr', 'App\Controllers\UserController:updateSSR');
 	$this->post('/theme', 'App\Controllers\UserController:updateTheme');
 	$this->post('/mail', 'App\Controllers\UserController:updateMail');
 	$this->post('/sspwd', 'App\Controllers\UserController:updateSsPwd');
@@ -238,11 +238,10 @@ $app->group('/admin', function () {
 
 
 	// IP Mange
-	$this->get('/alive', 'App\Controllers\Admin\IpController:index');
 	$this->get('/block', 'App\Controllers\Admin\IpController:block');
 	$this->get('/unblock', 'App\Controllers\Admin\IpController:unblock');
 	$this->post('/unblock', 'App\Controllers\Admin\IpController:doUnblock');
-	$this->get('/login', 'App\Controllers\Admin\IpController:index1');
+	$this->get('/login', 'App\Controllers\Admin\IpController:index');
 
 	// Code Mange
 	$this->get('/code', 'App\Controllers\Admin\CodeController:index');
