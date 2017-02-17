@@ -32,8 +32,8 @@ class Pay
         return '
 						<form action="/user/alipay" method="get" target="_blank" >
 							<h3>支付宝充值</h3>
-							<p>充值金额: <input type="text" name="amount" /></p>
-							<input type="submit" value="提交" />
+                            <label>充值金额<input class="form-control" name="amount" type="text"></label>
+                            <button class="btn btn-flat waves-attach waves-effect" type="submit"><span class="icon">check</span>&nbsp;充值</button>
 						</form>
 ';
     }
