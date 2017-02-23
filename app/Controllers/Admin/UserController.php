@@ -25,7 +25,7 @@ class UserController extends AdminController
                             "passwd" => "连接密码","port" => "连接端口", "method" => "加密方式",
                             "protocol" => "连接协议", "obfs" => "连接混淆方式",
                             "online_ip_count" => "在线IP数", "last_ss_time" => "上次使用时间",
-                            "used_traffic" => "已用流量/GB", "enable_traffic" => "总流量/GB",
+                            "unused_traffic" => "剩余流量/GB", "used_traffic" => "已用流量/GB", "enable_traffic" => "总流量/GB",
                             "last_checkin_time" => "上次签到时间", "today_traffic" => "今日流量/MB",
                             "is_enable" => "是否启用", "reg_date" => "注册时间",
                             "reg_location" => "注册IP", "auto_reset_day" => "自动重置流量日",
