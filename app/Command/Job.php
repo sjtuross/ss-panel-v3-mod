@@ -208,7 +208,7 @@ class Job
 
     public static function updatedownload()
     {
-        system('cd '.BASE_PATH."/public/ssr-download/ && git pull", $ret);
+        system('cd '.BASE_PATH."/public/ssr-download/ && git reset --hard && git pull", $ret);
         echo $ret;
     }
 
