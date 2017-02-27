@@ -198,9 +198,9 @@ class UserController extends BaseController
 
     public function lookingglass($request, $response, $args)
     {
-        $Speedtest=Speedtest::where("datetime", ">", time()-Config::get('Speedtest_duration')*3600)->orderBy('datetime', 'desc')->get();
+        $Speedtest=Speedtest::where("datetime", ">", time()-(Config::get('Speedtest_duration')+6)*3600)->orderBy('datetime', 'desc')->get();
 
-        return $this->view()->assign('speedtest', $Speedtest)->assign('hour', Config::get('Speedtest_duration'))->display('user/lookingglass.tpl');
+        return $this->view()->assign('speedtest', $Speedtest)->assign('hour', Config::get('Speedtest_duration')+6)->display('user/lookingglass.tpl');
     }
 
 
