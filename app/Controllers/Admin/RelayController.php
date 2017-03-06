@@ -30,9 +30,9 @@ class RelayController extends AdminController
     public function create($request, $response, $args)
     {
         $user = Auth::getUser();
-        $source_nodes = Node::where('type', 1)->where('sort', 10)->orderBy('name')->get();
+        $source_nodes = Node::where('sort', 10)->orderBy('name')->get();
 
-        $dist_nodes = Node::where('type', 1)->where(
+        $dist_nodes = Node::where(
             function ($query) {
                 $query->Where('sort', 0)
                     ->orWhere('sort', 10);
@@ -68,7 +68,10 @@ class RelayController extends AdminController
         $rule = new Relay();
         $rule->user_id = $user_id;
         $rule->dist_node_id = $dist_node_id;
-        $rule->dist_ip = $dist_node->node_ip;
+
+        $dist_node_ip = Tools::getRelayNodeIp($source_node, $dist_node);
+        $rule->dist_ip = $dist_node_ip;
+
         $rule->source_node_id = $source_node_id;
         $rule->port = $port;
         $rule->priority = $priority;
@@ -110,9 +113,9 @@ class RelayController extends AdminController
             exit(0);
         }
 
-        $source_nodes = Node::where('type', 1)->where('sort', 10)->orderBy('name')->get();
+        $source_nodes = Node::where('sort', 10)->orderBy('name')->get();
 
-        $dist_nodes = Node::where('type', 1)->where(
+        $dist_nodes = Node::where(
             function ($query) {
                 $query->Where('sort', 0)
                     ->orWhere('sort', 10);
@@ -153,7 +156,10 @@ class RelayController extends AdminController
 
         $rule->user_id = $user_id;
         $rule->dist_node_id = $dist_node_id;
-        $rule->dist_ip = $dist_node->node_ip;
+
+        $dist_node_ip = Tools::getRelayNodeIp($source_node, $dist_node);
+        $rule->dist_ip = $dist_node_ip;
+
         $rule->source_node_id = $source_node_id;
         $rule->port = $port;
         $rule->priority = $priority;
@@ -222,7 +228,7 @@ class RelayController extends AdminController
                 $query->Where("node_group", "=", $user->node_group)
                       ->orWhere("node_group", "=", 0);
             }
-        )->where('type', 1)->where("sort", "=", 10)->where("node_class", "<=", $user->class)->orderBy('name')->get();
+        )->where("sort", "=", 10)->where("node_class", "<=", $user->class)->orderBy('name')->get();
 
         $pathset = new \ArrayObject();
 
@@ -261,6 +267,39 @@ class RelayController extends AdminController
                         if ($relay_rule != null) {
                             $pathset = Tools::insertPathRule($relay_rule, $pathset, $mu_user->port);
                         }
+                    }
+                }
+            }
+        }
+
+        foreach ($pathset as $path) {
+            foreach ($pathset as $index => $single_path) {
+                if ($path != $single_path && $path->port == $single_path->port) {
+                    if ($single_path->end_node->id == $path->begin_node->id) {
+                        $path->begin_node = $single_path->begin_node;
+                        if ($path->begin_node->isNodeAccessable() == false) {
+                            $path->path = '<font color="#FF0000">'.$single_path->begin_node->name.'</font>'." → ".$path->path;
+                            $path->status = "阻断";
+                        } else {
+                            $path->path = $single_path->begin_node->name." → ".$path->path;
+                            $path->status = "通畅";
+                        }
+
+                        $pathset->offsetUnset($index);
+                        continue;
+                    }
+
+                    if ($path->end_node->id == $single_path->begin_node->id) {
+                        $path->end_node = $single_path->end_node;
+                        if ($single_path->end_node->isNodeAccessable() == false) {
+                            $path->path = $path->path." → ".'<font color="#FF0000">'.$single_path->end_node->name.'</font>';
+                            $path->status = "阻断";
+                        } else {
+                            $path->path = $path->path." → ".$single_path->end_node->name;
+                        }
+
+                        $pathset->offsetUnset($index);
+                        continue;
                     }
                 }
             }
