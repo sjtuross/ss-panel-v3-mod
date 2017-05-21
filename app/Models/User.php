@@ -26,9 +26,9 @@ class User extends Model
     public $isAdmin;
 
     protected $casts = [
-        "t" => 'int',
-        "u" => 'int',
-        "d" => 'int',
+        "t" => 'float',
+        "u" => 'float',
+        "d" => 'float',
         "port" => 'int',
         "transfer_enable" => 'float',
         "enable" => 'int',
@@ -279,10 +279,10 @@ class User extends Model
         $im_value = $this->attributes['im_value'];
         switch($this->attributes['im_type']) {
             case 1:
-              $im_type = 'QQ';
+              $im_type = '微信';
               break;
             case 2:
-              $im_type = '微信';
+              $im_type = 'QQ';
               break;
             case 3:
               $im_type = 'Google+';
