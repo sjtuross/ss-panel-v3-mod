@@ -1,4 +1,6 @@
-.idea
 .env
 vendor/
 composer.phar
+.user.ini
+public/.user.ini
+storage/*
